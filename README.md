@@ -14,7 +14,7 @@ npm start
 http://localhost:3000/
 
 *3*
-Login with Entra gpxx@entra.no user
+Login with whydah user
 
 ## Development
 ```
