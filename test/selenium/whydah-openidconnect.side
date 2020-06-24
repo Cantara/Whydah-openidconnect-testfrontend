@@ -1,0 +1,111 @@
+{
+  "id": "2c51b5b7-8b41-4434-aaf1-4b3b8ccaaac6",
+  "version": "2.0",
+  "name": "whydahos-openidconnect",
+  "url": "http://localhost:3000/door/open",
+  "tests": [{
+    "id": "70104733-ff88-4b12-a7ea-2bee1cca492d",
+    "name": "new-login",
+    "commands": [{
+      "id": "e9a6dac1-e800-4183-9514-120cd8e9b712",
+      "comment": "",
+      "command": "open",
+      "target": "https://whydahdev.cantara.no/sso/login?redirectURI=https%3A%2F%2Fwhydahdev.cantara.no%2Foauth2%2Fuser%3Foauth_session%3D5e2e64db-10b4-4380-af53-304b4a612a60",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "38724833-a4da-40d8-8c0b-2441de4f2d3a",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Whydah Login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ed50afb8-1cd8-470c-8cff-10fb67655b5f",
+      "comment": "",
+      "command": "click",
+      "target": "id=user_session_login",
+      "targets": [
+        ["id=user_session_login", "id"],
+        ["name=user", "name"],
+        ["css=#user_session_login", "css:finder"],
+        ["xpath=//input[@id='user_session_login']", "xpath:attributes"],
+        ["xpath=//div[@id='normal-login']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8204f8a4-a75e-4338-9669-8335a2c99a74",
+      "comment": "",
+      "command": "type",
+      "target": "id=user_session_login",
+      "targets": [
+        ["id=user_session_login", "id"],
+        ["name=user", "name"],
+        ["css=#user_session_login", "css:finder"],
+        ["xpath=//input[@id='user_session_login']", "xpath:attributes"],
+        ["xpath=//div[@id='normal-login']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "useradmin"
+    }, {
+      "id": "41bc8adb-2f4f-411f-b300-3432f915e0dd",
+      "comment": "",
+      "command": "click",
+      "target": "id=user_session_password",
+      "targets": [
+        ["id=user_session_password", "id"],
+        ["name=password", "name"],
+        ["css=#user_session_password", "css:finder"],
+        ["xpath=//input[@id='user_session_password']", "xpath:attributes"],
+        ["xpath=//div[@id='normal-login']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "95825a2c-11cc-4bcd-858d-7282b147d4c0",
+      "comment": "",
+      "command": "type",
+      "target": "id=user_session_password",
+      "targets": [
+        ["id=user_session_password", "id"],
+        ["name=password", "name"],
+        ["css=#user_session_password", "css:finder"],
+        ["xpath=//input[@id='user_session_password']", "xpath:attributes"],
+        ["xpath=//div[@id='normal-login']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "useradmin42"
+    }, {
+      "id": "2421e834-670b-4e0f-8ac9-4dcc43103b38",
+      "comment": "",
+      "command": "click",
+      "target": "name=commit",
+      "targets": [
+        ["name=commit", "name"],
+        ["css=.button:nth-child(7)", "css:finder"],
+        ["xpath=//input[@name='commit']", "xpath:attributes"],
+        ["xpath=//div[@id='normal-login']/input[5]", "xpath:idRelative"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b141d922-b298-4662-9626-534d9eb9e0c1",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Whydah-Openidconnect-Testfrontend: Home",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "6991251d-7af5-40e7-95f7-5a4830bed98d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["70104733-ff88-4b12-a7ea-2bee1cca492d"]
+  }],
+  "urls": ["https://whydahdev.cantara.no/", "http://localhost:3000/door/open"],
+  "plugins": []
+}
