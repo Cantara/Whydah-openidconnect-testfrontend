@@ -7,28 +7,29 @@ let whydahSsoClientId = process.env.WHYDAH_ACCESS_CLIENT_ID_ENCODED || "client-i
 let whydahSsoSecret = process.env.WHYDAH_ACCESS_CLIENT_SECRET || "client-secret-missing";
 let redirectUrl = process.env.REDIRECT_URL || "http://localhost:3000/door/simulator";
 //https://whydahsso-devtest.whydahos.io/oauth2/authorize?response_type=code&client_id=[YOUR_CLIENT_ID]&redirect_uri=[SOME_REDIRECT_URL]&scope=openid%20email%20phone&state=1234zyx
-let checkToken = (req, res, next) => {
-    let token = req.headers['x-access-token'] || req.headers['authorization'] || req.query.token; // Express headers are auto converted to lowercase
+let checkToken = async (req, res, next) => {
+    let accessToken = req.headers['x-access-token'] || req.headers['authorization'] || req.query.token; // Express headers are auto converted to lowercase
     let authCode = req.query.code;
     let authClientState = req.query.state;
     if (authCode) {
         //Fetch Token
         //const tokenUrl = "https://whydahsso-demo.whydahos.io/oauth2/token?grant_type=authorization_code&code=" + authCode;
         const tokenUrl = "https://whydahdev.cantara.no/oauth2/token?grant_type=authorization_code&code=" + authCode;
-        let tokenBody = postData(tokenUrl);
-        console.log("tokenBody:", tokenBody);
+        let token = await postData(tokenUrl);
+        console.log("tokenBody:", token);
+        accessToken = token.access_token;
     }
-    if (token && token.startsWith('Bearer ')) {
+    if (accessToken && accessToken.startsWith('Bearer ')) {
         // Remove Bearer from string
-        token = token.slice(7, token.length);
+        accessToken = accessToken.slice(7, accessToken.length);
     }
-    if (token) {
-        console.log("Token: ", token);
-        token = token.replace(/\"/g, '');
+    if (accessToken) {
+        console.log("Token: ", accessToken);
+        accessToken = accessToken.replace(/\"/g, '');
         // token = token.replace("%22", "");
-        console.log("***" + token);
+        console.log("***" + accessToken);
         let jwtSecret = process.env.JWT_SECRET || config.jwtSecret;
-        jwt.verify(token, jwtSecret, (err, decoded) => {
+        jwt.verify(accessToken, jwtSecret, (err, decoded) => {
             if (err) {
                 console.log("err: ", err);
                 return res.json({
@@ -42,13 +43,13 @@ let checkToken = (req, res, next) => {
             }
         });
     } else {
-        console.log("Redirect. authcode:", authCode, ", token: ", token);
+        console.log("Redirect. authcode:", authCode, ", token: ", accessToken);
         //authorize?response_type=code&client_id=rvMFAu67PX2s.eoWWuD0JTQGH7m03gXiKFjMlmNyAJE-&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=openid%20email%20phone&state=1234zy"
         const authorizeUrl = whydahSsoUrl + "/authorize?response_type=code&scope=openid%20email&state=1234zy" +
             "&client_id=" + whydahSsoClientId +
             "&redirect_url=" + encodeURI(redirectUrl);
-        console.log("Redirect. authcode:", authCode, ", token: ", token, " authorizeUrl: ", authorizeUrl);
-        return  res.redirect(301, authorizeUrl);
+        console.log("Redirect. authcode:", authCode, ", token: ", accessToken, " authorizeUrl: ", authorizeUrl);
+        return res.redirect(301, authorizeUrl);
     }
 };
 
