@@ -21,3 +21,8 @@ Login with Entra gpxx@entra.no user
 nodemon --exec npm start
 ```
 
+## Selenium IDE tests
+Add plugin to your browser  https://www.selenium.dev/selenium-ide/
+
+Selenium testsuite [test/selenium]
+
