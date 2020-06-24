@@ -2,10 +2,10 @@ let jwt = require('jsonwebtoken');
 const fetch = require("node-fetch");
 const async  = require('express-async-await');
 const config = require('./config.js');
-let whydahSsoUrl = process.env.WHYDAH_ACCESS_URL || "https://whydahdev.cantara.no/";
-let whydahSsoClientId = process.env.WHYDAH_ACCESS_CLIENT_ID || "client-id-missing";
+let whydahSsoUrl = process.env.WHYDAH_ACCESS_URL || "https://whydahdev.cantara.no/oauth2";
+let whydahSsoClientId = process.env.WHYDAH_ACCESS_CLIENT_ID_ENCODED || "client-id-missing";
 let whydahSsoSecret = process.env.WHYDAH_ACCESS_CLIENT_SECRET || "client-secret-missing";
-console.log("Middelware WhydahSSOUrl: ", whydahSsoUrl);
+let redirectUrl = process.env.REDIRECT_URL || "http://localhost:3000/door/simulator";
 //https://whydahsso-devtest.whydahos.io/oauth2/authorize?response_type=code&client_id=[YOUR_CLIENT_ID]&redirect_uri=[SOME_REDIRECT_URL]&scope=openid%20email%20phone&state=1234zyx
 let checkToken = (req, res, next) => {
     let token = req.headers['x-access-token'] || req.headers['authorization'] || req.query.token; // Express headers are auto converted to lowercase
@@ -43,7 +43,12 @@ let checkToken = (req, res, next) => {
         });
     } else {
         console.log("Redirect. authcode:", authCode, ", token: ", token);
-        return  res.redirect(301, whydahSsoUrl);
+        //authorize?response_type=code&client_id=rvMFAu67PX2s.eoWWuD0JTQGH7m03gXiKFjMlmNyAJE-&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=openid%20email%20phone&state=1234zy"
+        const authorizeUrl = whydahSsoUrl + "/authorize?response_type=code&scope=openid%20email&state=1234zy" +
+            "&client_id=" + whydahSsoClientId +
+            "&redirect_url=" + encodeURI(redirectUrl);
+        console.log("Redirect. authcode:", authCode, ", token: ", token, " authorizeUrl: ", authorizeUrl);
+        return  res.redirect(301, authorizeUrl);
     }
 };
 
