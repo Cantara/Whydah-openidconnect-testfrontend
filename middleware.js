@@ -28,8 +28,8 @@ let checkToken = async (req, res, next) => {
         accessToken = accessToken.replace(/\"/g, '');
         // token = token.replace("%22", "");
         console.log("***" + accessToken);
-        let jwtSecret = process.env.JWT_SECRET || config.jwtSecret;
-        jwt.verify(accessToken, jwtSecret, (err, decoded) => {
+        // let jwtSecret = process.env.JWT_SECRET || config.jwtSecret;
+        jwt.verify(accessToken, whydahSsoSecret, (err, decoded) => {
             if (err) {
                 console.log("err: ", err);
                 return res.json({
