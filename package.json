@@ -7,7 +7,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@azure/cosmos": "^3.11.2",
+    "@azure/cosmos": "^3.11.3",
     "azure-iothub": "^1.14.0",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.12.1",
