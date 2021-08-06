@@ -10,7 +10,7 @@
     "@azure/cosmos": "^3.11.3",
     "azure-iothub": "^1.14.2",
     "cookie-parser": "~1.4.4",
-    "core-js": "^3.14.0",
+    "core-js": "^3.15.2",
     "debug": "~2.6.9",
     "dotenv": "^9.0.2",
     "express": "~4.17.1",
