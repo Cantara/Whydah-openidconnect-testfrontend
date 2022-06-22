@@ -20,7 +20,7 @@
     "jsonwebtoken": "8.5.1",
     "jwks-rsa": "1.12.3",
     "morgan": "1.10.0",
-    "node-fetch": "3.2.4",
+    "node-fetch": "3.2.6",
     "pug": "3.0.2"
   },
   "devDependencies": {
