@@ -18,7 +18,7 @@
     "express-session": "1.18.0",
     "http-errors": "2.0.0",
     "jsonwebtoken": "9.0.2",
-    "jwks-rsa": "1.12.3",
+    "jwks-rsa": "3.1.0",
     "morgan": "1.10.0",
     "node-fetch": "3.2.10",
     "pug": "3.0.2"
