@@ -9,7 +9,7 @@
   "dependencies": {
     "@azure/cosmos": "3.16.1",
     "azure-iothub": "1.16.5",
-    "cookie-parser": "1.4.6",
+    "cookie-parser": "1.4.7",
     "core-js": "3.37.1",
     "debug": "2.6.9",
     "dotenv": "16.4.5",
